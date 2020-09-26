@@ -1,10 +1,7 @@
-#Submission : Uber Case Study
-#Submitted by : Vineet Jain
-#Roll Number : DDA160171
 
 ############################################ DATA PREPARATION ######################
 
-#### 1) Make a grouped bar chart depicting the hour-wise trip request made at city and airport respectively. You can aggregate the data for all 5 days on the same axis of 24 hours. Each bar should correspond to an hour and pick-up point (city / airport) should be displayed in two colours?(Hint: you can either use the as.Date & as.Time format to convert the Request_time to the required format or can extract the first 2 digits of the string using substring function)
+#### 1) Make a grouped bar chart depicting the hour-wise trip request made at city and airport respectively. Aggregated the data for all 5 days on the same axis of 24 hours.
 
 uber_request_data <- read.csv("Uber request data.csv", stringsAsFactors = F)
 
@@ -12,7 +9,7 @@ PickUp_Point <- uber_request_data$Pickup.point
 Hours <- substr(as.factor(uber_request_data$Request.time), 1, 2)
 ggplot(uber_request_data, aes(x = Hours, fill = PickUp_Point)) +  geom_bar(position = "dodge")
 
-#### 2) In the bar chart (question 1), you'll be able to see 5 major time blocks based on the frequency of requests made at the city and airport. You have to now divide the request-time into 5 time-slots described below. Make an additional column "Time_Slot" which takes these 5 categorical values depending on the request time: (Hint: you can either use "elseif" function or a simple conditional for loop to achieve this.) Pre_Morning, Morning_Rush, Day_Time, Evening_Rush, Late_Night
+#### 2) 2.	In the bar chart above (in pt.1), see 5 major time blocks based on the frequency of requests made at the city and airport. We now divide the request-time into 5 time-slots described below. An additional column “Time_Slot” is added which takes these 5 categorical values depending on the request time
 
 for(i in 1:nrow(uber_request_data)){
   
@@ -46,7 +43,7 @@ summary(factor(uber_request_data$Time.Slot))
 
 ######################################## PROBLEM IDENTIFICATION #################
 
-#### 1) Make a stacked bar chart where each bar represents a time slot and the y-axis shows the frequency of requests. Different proportions of bars should represent the completed, cancelled and no cars available out of the total customer requests. (Hint: ggplot)
+#### 1) Stacked bar chart where each bar represents a time slot and the y-axis shows the frequency of requests. Different proportions of bars should represent the completed, cancelled and no cars available out of the total customer requests. (Hint: ggplot)
 
 ggplot(uber_request_data, aes(x = Time.Slot, fill = Status)) +  geom_bar()
 
